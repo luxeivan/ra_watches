@@ -1,0 +1,62 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  max-width: 1024px;
+  margin: 20px auto;
+}
+
+.managment {
+  display: flex;
+  gap: 20px;
+}
+
+.label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.input {
+  padding: 5px;
+}
+
+.managment__button {
+  background-color: coral;
+  border: 0;
+  border-radius: 2px;
+  color: white;
+  padding: 0 10px;
+}
+
+.managment__button:hover {
+  background-color: rgb(254, 157, 122);
+  cursor: pointer;
+}
+.watches__area{
+  display: flex;
+  flex-wrap: wrap;
+}
+.watch {
+  border: 1px solid #eee;
+  border-radius: 3px;
+}
+
+.watch__name {
+  font-weight: 800;
+  margin: 10px;
+}
+
+.watch__time {
+  margin: 10px;
+}
+
+.watch__button {
+  padding: 10px 15px;
+  background-color: crimson;
+  color: #fff;
+  margin: 10px;
+  border: 0;
+  border-radius: 3px;
+}
+.watch__button:hover {
+  background-color: rgb(214, 78, 105);
+}

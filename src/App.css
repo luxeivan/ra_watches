@@ -38,6 +38,7 @@
 .watch {
   border: 1px solid #eee;
   border-radius: 3px;
+  margin: 20px;
 }
 
 .watch__name {
@@ -59,4 +60,5 @@
 }
 .watch__button:hover {
   background-color: rgb(214, 78, 105);
+  cursor: pointer;
 }

@@ -1,45 +1,37 @@
 import { nanoid } from 'nanoid';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import ManagmentWatches from './components/ManagmentWatches';
 import Watches from './components/Watches';
 
 function App() {
   const [watches, setWatches] = useState({})
-
-  // setTimeout(() => {
-  //   const newWatches = { ...watches }
-  //   Object.keys(newWatches).length !== 0 && Object.keys(newWatches).forEach(key => {
-  //     let currentDate = new Date();
-  //     currentDate = (currentDate.valueOf() + currentDate.getTimezoneOffset() * 60 * 1000) + watches[key].zone * 3600 * 1000;
-  //     newWatches[key].time = currentDate
-  //   })
-  //   setWatches(newWatches)
-  // }, 1000)
+  useEffect(() => {
+    const id = setTimeout(() => {
+      const newWatches = { ...watches }
+      Object.keys(newWatches).length !== 0 && Object.keys(newWatches).forEach(key => {
+        let currentDate = new Date();
+        currentDate = (currentDate.valueOf() + currentDate.getTimezoneOffset() * 60000) + watches[key].zone * 3600000;
+        newWatches[key].time = currentDate
+      })
+      setWatches(newWatches)
+    }, 1000)
+    return ()=>clearTimeout(id)
+  },[watches])
 
   const handlerAdd = event => {
     event.preventDefault()
     let currentDate = new Date();
     currentDate = (currentDate.valueOf() + currentDate.getTimezoneOffset() * 60 * 1000) + event.target[1].value * 3600 * 1000;
     const newID = nanoid();
-    const timeoutID = setInterval(() => {
-      console.log(watches)
-      if(watches[newID]){
-        const newWatches = { ...watches }
-        let currentDate = new Date();
-        currentDate = (currentDate.valueOf() + currentDate.getTimezoneOffset() * 60 * 1000) + newWatches[newID].zone * 3600 * 1000;
-        newWatches[newID].time = currentDate
-        console.log(newWatches)
-        setWatches(newWatches)
-      }
-    }, 1000)
     const newWatches = { ...watches }
-    newWatches[newID] = { name: event.target[0].value, zone: event.target[1].value, time: currentDate, timeoutID: timeoutID }
+    newWatches[newID] = { name: event.target[0].value, zone: event.target[1].value, time: currentDate}
     setWatches(newWatches)
   }
   const handlerDel = event => {
-    console.log(event)
-console.log()
+    const newWatches = {...watches}
+    delete newWatches[event.target.dataset.id]
+    setWatches(newWatches)
   }
   return (
     <div className="App">
